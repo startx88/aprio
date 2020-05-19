@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 Widget appBars(
@@ -5,7 +6,34 @@ Widget appBars(
   BuildContext context,
 ) {
   return AppBar(
-    title: Text(title),
+    title: Row(
+      children: [
+        kIsWeb
+            ? IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                icon: Icon(Icons.dehaze),
+              )
+            : Text(title),
+        if (kIsWeb)
+          Container(
+            margin: const EdgeInsets.only(left: 10),
+            width: 250,
+            height: 40,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(20.0)),
+            child: TextFormField(
+              keyboardType: TextInputType.text,
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  icon: Icon(Icons.search),
+                  hintText: 'Type to search...'),
+            ),
+          )
+      ],
+    ),
     actions: [
       IconButton(
         icon: Icon(Icons.mail),

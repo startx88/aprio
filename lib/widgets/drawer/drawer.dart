@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Drawers extends StatelessWidget {
+  final bool isWeb = kIsWeb;
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -12,7 +13,7 @@ class Drawers extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         child: ListView(
           children: [
-            kIsWeb
+            isWeb
                 ? Container(
                     height: 200,
                     decoration: BoxDecoration(
@@ -23,9 +24,18 @@ class Drawers extends StatelessWidget {
                     ),
                   )
                 : UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        colorFilter: ColorFilter.mode(
+                            Color.fromRGBO(0, 0, 0, 0.8), BlendMode.luminosity),
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            'https://img.freepik.com/free-vector/abstract-colorful-flow-shapes-background_23-2148258092.jpg?size=626&ext=jpg'),
+                      ),
+                    ),
                     currentAccountPicture: GestureDetector(
                       onTap: () {
-                        print('hello');
+                        //print('hello');
                       },
                       child: CircleAvatar(
                         radius: 60.0,
@@ -35,12 +45,13 @@ class Drawers extends StatelessWidget {
                     accountName: Text('Aprio Boardroom'),
                     accountEmail: Text('aprio@info.com'),
                   ),
-            Divider(
-              indent: 20.0,
-              endIndent: 20.0,
-              height: 2,
-              thickness: 2.0,
-            ),
+            if (isWeb)
+              Divider(
+                indent: 20.0,
+                endIndent: 20.0,
+                height: 2,
+                thickness: 2.0,
+              ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
@@ -189,6 +200,45 @@ class Drawers extends StatelessWidget {
                 image: AssetImage('assets/images/goal-icon.png'),
               ),
               DrawerText('Contact Us'),
+              () => {},
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
+              child: Text(
+                "SETTINGS",
+                style: TextStyle(
+                  color: Colors.white54,
+                  fontSize: Theme.of(context).textTheme.bodyText2.fontSize,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ),
+            drawerLinkItem(
+              context,
+              Icon(
+                Icons.settings,
+                color: Theme.of(context).iconTheme.color,
+              ),
+              DrawerText('Account Settings'),
+              () => {},
+            ),
+            drawerLinkItem(
+              context,
+              Icon(
+                Icons.brightness_3,
+                color: Theme.of(context).iconTheme.color,
+              ),
+              DrawerText('Dark Mode'),
+              () => {},
+            ),
+            drawerLinkItem(
+              context,
+              FaIcon(
+                FontAwesomeIcons.signOutAlt,
+                color: Theme.of(context).iconTheme.color,
+              ),
+              DrawerText('Logout'),
               () => {},
             ),
           ],

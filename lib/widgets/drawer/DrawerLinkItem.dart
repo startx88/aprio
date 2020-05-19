@@ -9,7 +9,6 @@ Widget drawerLinkItem(
   Icon trailIcon,
 ]) {
   return InkWell(
-    focusColor: Colors.white,
     highlightColor: Colors.white10,
     hoverColor: Colors.white10,
     onTap: pressed,
