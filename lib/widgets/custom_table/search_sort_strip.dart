@@ -52,7 +52,7 @@ class _SearchSortStripState extends State<SearchSortStrip> {
                         iconSize: 14,
                         icon: FaIcon(FontAwesomeIcons.sort),
                         value: selectValue,
-                        items: <int>[10, 20, 30, 40]
+                        items: <int>[10, 25, 50, 100]
                             .map<DropdownMenuItem<int>>((int value) {
                           return DropdownMenuItem<int>(
                             value: value,

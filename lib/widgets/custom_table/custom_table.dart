@@ -2,6 +2,20 @@ import 'package:aprio/widgets/custom_table/search_sort_strip.dart';
 import 'package:aprio/widgets/custom_table/tableTitle.dart';
 import 'package:aprio/widgets/custom_table/table_info.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+class TableAction {
+  String text;
+  IconData icon;
+
+  TableAction({this.text, this.icon});
+}
+
+List<TableAction> actions = [
+  TableAction(text: "Edit", icon: FontAwesomeIcons.edit),
+  TableAction(text: "Delete", icon: FontAwesomeIcons.trashAlt),
+  TableAction(text: "View Action", icon: FontAwesomeIcons.eye),
+];
 
 class CustomTable extends StatefulWidget {
   final String title;
@@ -62,6 +76,12 @@ class _CustomTableState extends State<CustomTable> {
             ),
             SearchSortStrip(),
             TableInfo(),
+            Divider(
+              color: Color.fromRGBO(0, 0, 0, 0.2),
+              thickness: 2,
+              endIndent: 15,
+              indent: 15,
+            ),
             Container(
               width: double.infinity,
               child: tables(),
@@ -78,33 +98,72 @@ class _CustomTableState extends State<CustomTable> {
       showCheckboxColumn: true,
       sortColumnIndex: sortIndex,
       sortAscending: true,
-      columns: _keys
-          .map(
-            (name) => DataColumn(
-                label: Text(
-                  name,
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                numeric: false,
-                onSort: (a, b) => sortHandler(a, b, name),
-                tooltip: 'To display first name of column'),
-          )
-          .toList(),
+      columns: [
+        ..._keys
+            .map(
+              (name) => DataColumn(
+                  label: Text(
+                    name,
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                  numeric: false,
+                  onSort: (a, b) => sortHandler(a, b, name),
+                  tooltip: 'To display first name of column'),
+            )
+            .toList(),
+        DataColumn(
+            label: Text(
+          'Action',
+          style: Theme.of(context).textTheme.headline6,
+        ))
+      ],
       rows: widget.data
           .map(
             (v) => DataRow(
               key: Key(v['id']),
               selected: selectedContact.contains(v),
               onSelectChanged: (value) => onSelectRow(value, v),
-              cells: _keys
-                  .map(
-                    (k) => DataCell(
-                      Text(
-                        v['$k'].toString(),
+              cells: [
+                ..._keys
+                    .map(
+                      (k) => DataCell(
+                        Text(
+                          v['$k'].toString(),
+                        ),
                       ),
-                    ),
-                  )
-                  .toList(),
+                    )
+                    .toList(),
+                DataCell(
+                  PopupMenuButton(
+                    offset: Offset.zero,
+                    padding: const EdgeInsets.all(0),
+                    itemBuilder: (_) => actions
+                        .map(
+                          (e) => PopupMenuItem(
+                            height: 40,
+                            child: Row(
+                              children: [
+                                FaIcon(
+                                  e.icon,
+                                  size: 14,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  e.text,
+                                  style: Theme.of(context).textTheme.headline6,
+                                ),
+                              ],
+                            ),
+                            value: 0,
+                          ),
+                        )
+                        .toList(),
+                    onSelected: (int val) {},
+                  ),
+                )
+              ],
             ),
           )
           .toList(),

@@ -51,9 +51,9 @@ class MyApp extends StatelessWidget {
                 kIsWeb ? TextStyle(fontSize: 18) : TextStyle(fontSize: 14),
             headline6: kIsWeb
                 ? TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.grey)
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black87)
                 : TextStyle(fontSize: 14),
           ),
           accentColor: Color.fromRGBO(0, 84, 136, 1)),
