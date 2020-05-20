@@ -6,12 +6,13 @@ Widget appBars(
   BuildContext context,
 ) {
   return AppBar(
+    automaticallyImplyLeading: !kIsWeb,
     title: Row(
       children: [
         kIsWeb
             ? IconButton(
                 onPressed: () {
-                  Scaffold.of(context).openDrawer();
+                  // Scaffold.of(context).openDrawer();
                 },
                 icon: Icon(Icons.dehaze),
               )

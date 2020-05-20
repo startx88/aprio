@@ -1,9 +1,11 @@
-import 'package:aprio/widgets/appbar/appbar.dart';
-import 'package:aprio/widgets/drawer/drawer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:aprio/widgets/appbar/appbar.dart';
+import 'package:aprio/widgets/drawer/Sidebar.dart';
+import 'package:aprio/widgets/drawer/drawer.dart';
 
 class DashboardScreen extends StatefulWidget {
+  static const routeName = "/";
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
@@ -13,12 +15,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraint) {
-        //print(constraint);
         return kIsWeb
             ? Material(
                 child: Row(
                   children: [
-                    Drawers(),
+                    Sidebar(),
                     Flexible(
                       fit: FlexFit.loose,
                       child: Column(

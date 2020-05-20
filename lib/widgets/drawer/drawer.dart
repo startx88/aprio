@@ -1,11 +1,29 @@
-import 'package:aprio/widgets/drawer/DrawerLinkItem.dart';
-import 'package:aprio/widgets/drawer/DrawerLinkText.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:aprio/widgets/drawer/LinkItem.dart';
+import '../../models/Navigation.dart';
 
-class Drawers extends StatelessWidget {
-  final bool isWeb = kIsWeb;
+class Drawers extends StatefulWidget {
+  @override
+  _DrawersState createState() => _DrawersState();
+}
+
+class _DrawersState extends State<Drawers> with TickerProviderStateMixin {
+  double maxWidth = 300.0;
+  double minWidth = 60;
+  bool isCollapse = false;
+  AnimationController _animationController;
+  Animation<double> withAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+        vsync: this, duration: Duration(microseconds: 3000));
+
+    withAnimation = Tween<double>(begin: maxWidth, end: minWidth)
+        .animate(_animationController);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -13,45 +31,28 @@ class Drawers extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         child: ListView(
           children: [
-            isWeb
-                ? Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/logo.png'),
-                      ),
-                    ),
-                  )
-                : UserAccountsDrawerHeader(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        colorFilter: ColorFilter.mode(
-                            Color.fromRGBO(0, 0, 0, 0.8), BlendMode.luminosity),
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            'https://img.freepik.com/free-vector/abstract-colorful-flow-shapes-background_23-2148258092.jpg?size=626&ext=jpg'),
-                      ),
-                    ),
-                    currentAccountPicture: GestureDetector(
-                      onTap: () {
-                        //print('hello');
-                      },
-                      child: CircleAvatar(
-                        radius: 60.0,
-                        backgroundImage: AssetImage('assets/images/logo.png'),
-                      ),
-                    ),
-                    accountName: Text('Aprio Boardroom'),
-                    accountEmail: Text('aprio@info.com'),
-                  ),
-            if (isWeb)
-              Divider(
-                indent: 20.0,
-                endIndent: 20.0,
-                height: 2,
-                thickness: 2.0,
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  colorFilter: ColorFilter.mode(
+                      Color.fromRGBO(0, 0, 0, 0.8), BlendMode.luminosity),
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                      'https://img.freepik.com/free-vector/abstract-colorful-flow-shapes-background_23-2148258092.jpg?size=626&ext=jpg'),
+                ),
               ),
+              currentAccountPicture: GestureDetector(
+                onTap: () {
+                  //print('hello');
+                },
+                child: CircleAvatar(
+                  radius: 60.0,
+                  backgroundImage: AssetImage('assets/images/logo.png'),
+                ),
+              ),
+              accountName: Text('Aprio Boardroom'),
+              accountEmail: Text('aprio@info.com'),
+            ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
@@ -64,119 +65,20 @@ class Drawers extends StatelessWidget {
                 ),
               ),
             ),
-            drawerLinkItem(
-              context,
-              Icon(
-                Icons.person,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Boardroom'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              Icon(
-                Icons.home,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Dashboard'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              FaIcon(
-                FontAwesomeIcons.wrench,
-                size: 20,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Settings'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              Icon(
-                Icons.description,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Actions'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              FaIcon(
-                FontAwesomeIcons.comments,
-                size: 20,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('discussions'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              Icon(
-                Icons.work,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Library'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              Icon(
-                Icons.calendar_today,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Events'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              Icon(
-                Icons.account_circle,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Contacts'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              Icon(
-                Icons.group,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Groups'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              FaIcon(
-                FontAwesomeIcons.poll,
-                size: 20,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Polls / Surveys'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              Icon(
-                Icons.credit_card,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Expenses'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              Image(
-                image: AssetImage('assets/images/goal-icon.png'),
-              ),
-              DrawerText('Goals'),
-              () => {},
-            ),
+            ...menuItems
+                .map(
+                  (item) => LinkItem(
+                    icon: item.icon,
+                    title: item.title,
+                    pressed: () =>
+                        Navigator.of(context).pushReplacementNamed(item.route),
+                    animationController: _animationController,
+                  ),
+                )
+                .toList(),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
+              padding: const EdgeInsets.only(
+                  top: 50, left: 20, right: 20, bottom: 15),
               child: Text(
                 "SUPPORT",
                 style: TextStyle(
@@ -186,25 +88,20 @@ class Drawers extends StatelessWidget {
                 ),
               ),
             ),
-            drawerLinkItem(
-              context,
-              Image(
-                image: AssetImage('assets/images/goal-icon.png'),
-              ),
-              DrawerText('Need Help?'),
-              () => {},
-            ),
-            drawerLinkItem(
-              context,
-              Image(
-                image: AssetImage('assets/images/goal-icon.png'),
-              ),
-              DrawerText('Contact Us'),
-              () => {},
-            ),
+            ...supportItem
+                .map(
+                  (item) => LinkItem(
+                    icon: item.icon,
+                    title: item.title,
+                    pressed: () =>
+                        Navigator.of(context).pushReplacementNamed(item.route),
+                    animationController: _animationController,
+                  ),
+                )
+                .toList(),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
+              padding: const EdgeInsets.only(
+                  top: 50, left: 20, right: 20, bottom: 15),
               child: Text(
                 "SETTINGS",
                 style: TextStyle(
@@ -214,33 +111,49 @@ class Drawers extends StatelessWidget {
                 ),
               ),
             ),
-            drawerLinkItem(
-              context,
-              Icon(
-                Icons.settings,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Account Settings'),
-              () => {},
+            ...settingsItem
+                .map(
+                  (item) => LinkItem(
+                    icon: item.icon,
+                    title: item.title,
+                    pressed: () =>
+                        Navigator.of(context).pushReplacementNamed(item.route),
+                    animationController: _animationController,
+                  ),
+                )
+                .toList(),
+            SizedBox(
+              height: 30,
             ),
-            drawerLinkItem(
-              context,
-              Icon(
-                Icons.brightness_3,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              DrawerText('Dark Mode'),
-              () => {},
+            Divider(
+              color: Colors.white10,
+              indent: 20.0,
+              endIndent: 20.0,
+              height: 1,
+              thickness: 1,
             ),
-            drawerLinkItem(
-              context,
-              FaIcon(
-                FontAwesomeIcons.signOutAlt,
-                color: Theme.of(context).iconTheme.color,
+            Align(
+                child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
+              child: Column(
+                children: [
+                  Text(
+                    'Version 1.0.0',
+                    style: TextStyle(
+                        color: Colors.white30, fontWeight: FontWeight.w300),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'copyright - ${DateTime.now()}',
+                    style: TextStyle(
+                        color: Colors.white30, fontWeight: FontWeight.w300),
+                  ),
+                ],
               ),
-              DrawerText('Logout'),
-              () => {},
-            ),
+            ))
           ],
         ),
       ),

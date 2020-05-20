@@ -1,3 +1,4 @@
+import 'package:aprio/screens/contact_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import './screens/dashboard_screen.dart';
@@ -24,21 +25,43 @@ class MyApp extends StatelessWidget {
                 : TextStyle(fontSize: 14),
             bodyText2:
                 kIsWeb ? TextStyle(fontSize: 12) : TextStyle(fontSize: 14),
-            headline1:
-                kIsWeb ? TextStyle(fontSize: 28) : TextStyle(fontSize: 22),
+            headline1: kIsWeb
+                ? TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  )
+                : TextStyle(fontSize: 22),
             headline2:
                 kIsWeb ? TextStyle(fontSize: 24) : TextStyle(fontSize: 20),
-            headline3:
-                kIsWeb ? TextStyle(fontSize: 22) : TextStyle(fontSize: 18),
+            headline3: kIsWeb
+                ? TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  )
+                : TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
             headline4:
                 kIsWeb ? TextStyle(fontSize: 20) : TextStyle(fontSize: 16),
             headline5:
                 kIsWeb ? TextStyle(fontSize: 18) : TextStyle(fontSize: 14),
-            headline6:
-                kIsWeb ? TextStyle(fontSize: 16) : TextStyle(fontSize: 14),
+            headline6: kIsWeb
+                ? TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.grey)
+                : TextStyle(fontSize: 14),
           ),
           accentColor: Color.fromRGBO(0, 84, 136, 1)),
-      home: DashboardScreen(),
+      initialRoute: '/',
+      routes: {
+        DashboardScreen.routeName: (ctx) => DashboardScreen(),
+        ContactScreen.routeName: (ctx) => ContactScreen()
+      },
     );
   }
 }
