@@ -1,4 +1,5 @@
 import 'package:aprio/widgets/appbar/appbar.dart';
+import 'package:aprio/widgets/custom_table/custom_table.dart';
 import 'package:aprio/widgets/drawer/Sidebar.dart';
 import 'package:aprio/widgets/drawer/drawer.dart';
 import 'package:aprio/widgets/page_title.dart';
@@ -74,47 +75,6 @@ class _ContactScreenState extends State<ContactScreen> {
     });
   }
 
-  Widget tables() {
-    var _keys = contactList[0].keys;
-    return DataTable(
-      showCheckboxColumn: true,
-      onSelectAll: (b) {
-        print(b);
-      },
-      sortColumnIndex: 1,
-      sortAscending: true,
-      columns: _keys
-          .map(
-            (name) => DataColumn(
-                label: Text(
-                  name,
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                numeric: false,
-                onSort: (a, b) {
-                  setState(() {
-                    sort = !sort;
-                    contactList.sort((a, b) => a[name].compareTo(b[name]));
-                  });
-                },
-                tooltip: 'To display first name of column'),
-          )
-          .toList(),
-      rows: contactList
-          .map(
-            (v) => DataRow(
-              selected: selectedContact.contains(v),
-              onSelectChanged: (value) {
-                onSelectRow(value, v);
-              },
-              cells:
-                  _keys.map((k) => DataCell(Text(v['$k'].toString()))).toList(),
-            ),
-          )
-          .toList(),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -141,42 +101,10 @@ class _ContactScreenState extends State<ContactScreen> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.all(10),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      width: double.infinity,
-                                      child: tables(),
-                                    )
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color: Color.fromRGBO(220, 223, 231, 1),
-                                      width: 1),
-                                ),
+                              CustomTable(
+                                title: 'All Contacts',
+                                data: contactList,
                               ),
-                              // Container(
-                              //   height: 500,
-                              //   margin: const EdgeInsets.only(top: 20),
-                              //   child: ListView.builder(
-                              //       itemCount: selectedContact.length,
-                              //       itemBuilder: (ctx, index) => Card(
-                              //             margin: const EdgeInsets.only(
-                              //               bottom: 10,
-                              //             ),
-                              //             child: Padding(
-                              //               padding: const EdgeInsets.all(10),
-                              //               child: Text("hello"),
-                              //             ),
-                              //           )),
-                              // )
                             ],
                           ),
                         )
