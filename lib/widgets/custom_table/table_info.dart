@@ -1,3 +1,4 @@
+import 'package:aprio/screens/edit_contact_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -92,7 +93,10 @@ class TableInfo extends StatelessWidget {
                 const SizedBox(width: 20.0),
                 FlatButton(
                   color: Colors.blue,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(EditContactScreen.routeName);
+                  },
                   child: Row(
                     children: [
                       Icon(

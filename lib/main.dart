@@ -1,4 +1,5 @@
 import 'package:aprio/screens/contact_screen.dart';
+import 'package:aprio/screens/edit_contact_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import './screens/dashboard_screen.dart';
@@ -60,7 +61,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         DashboardScreen.routeName: (ctx) => DashboardScreen(),
-        ContactScreen.routeName: (ctx) => ContactScreen()
+        ContactScreen.routeName: (ctx) => ContactScreen(),
+        EditContactScreen.routeName: (ctx) => EditContactScreen()
       },
     );
   }
