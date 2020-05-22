@@ -21,7 +21,9 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  zefyr: ^0.11.0
+  zefyr:
+  #flutter_icons: ^1.1.0
+  quill_delta: ^1.0.2
   responsive_table: ^0.1.1+8
   intl: ^0.16.1
   font_awesome_flutter: ^8.8.1

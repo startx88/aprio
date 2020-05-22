@@ -70,8 +70,7 @@ class _DrawersState extends State<Drawers> with TickerProviderStateMixin {
                   (item) => LinkItem(
                     icon: item.icon,
                     title: item.title,
-                    pressed: () =>
-                        Navigator.of(context).pushReplacementNamed(item.route),
+                    pressed: () => Navigator.of(context).pushNamed(item.route),
                     animationController: _animationController,
                   ),
                 )
@@ -93,8 +92,7 @@ class _DrawersState extends State<Drawers> with TickerProviderStateMixin {
                   (item) => LinkItem(
                     icon: item.icon,
                     title: item.title,
-                    pressed: () =>
-                        Navigator.of(context).pushReplacementNamed(item.route),
+                    pressed: () => Navigator.of(context).pushNamed(item.route),
                     animationController: _animationController,
                   ),
                 )
@@ -116,8 +114,7 @@ class _DrawersState extends State<Drawers> with TickerProviderStateMixin {
                   (item) => LinkItem(
                     icon: item.icon,
                     title: item.title,
-                    pressed: () =>
-                        Navigator.of(context).pushReplacementNamed(item.route),
+                    pressed: () => Navigator.of(context).pushNamed(item.route),
                     animationController: _animationController,
                   ),
                 )

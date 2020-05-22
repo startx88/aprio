@@ -1,23 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-class ContactStepper {
-  final String title;
-  Color color;
-
-  ContactStepper({this.title, this.color});
-}
-
-List<ContactStepper> stepperList = [
-  ContactStepper(title: 'Personal Information', color: Colors.blue),
-  ContactStepper(title: 'Address Information', color: Colors.blue),
-  ContactStepper(title: 'Contact Information', color: Colors.blue),
-  ContactStepper(title: 'Bio & Signature', color: Colors.blue),
-];
+import '../models/contact_stepper.dart';
 
 class StepForm extends StatefulWidget {
   final Function getContactInfo;
-
   StepForm({this.getContactInfo});
 
   @override
@@ -53,7 +39,6 @@ class _StepFormState extends State<StepForm> {
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context).size;
-
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraint) {
       switch (step) {
@@ -370,7 +355,42 @@ class _StepFormState extends State<StepForm> {
               ));
           break;
         case 4:
-          child = Container(child: Text('hello'));
+          child = Container(
+            padding: const EdgeInsets.all(10),
+            color: Color.fromRGBO(0, 0, 0, 0.1),
+            child: Column(
+              children: [
+                Wrap(
+                  children: [
+                    ButtonBar(
+                      children: <Widget>[
+                        FlatButton(
+                          child: Text('Ok'),
+                          color: Colors.blue,
+                          onPressed: () {/** */},
+                        ),
+                        FlatButton(
+                          child: Text('Cancel'),
+                          color: Colors.blue,
+                          onPressed: () {/** */},
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                Material(
+                  color: Colors.white,
+                  child: TextFormField(
+                    maxLines: 10,
+                    decoration: InputDecoration(
+                      labelText: 'enter message',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
           break;
       }
 

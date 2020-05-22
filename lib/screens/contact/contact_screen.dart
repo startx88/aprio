@@ -1,4 +1,7 @@
+import 'package:aprio/common/search/Search.dart';
+import './edit_contact_screen.dart';
 import 'package:aprio/widgets/appbar/appbar.dart';
+import 'package:aprio/widgets/contact/contact_card.dart';
 import 'package:aprio/widgets/custom_table/custom_table.dart';
 import 'package:aprio/widgets/drawer/Sidebar.dart';
 import 'package:aprio/widgets/drawer/drawer.dart';
@@ -117,6 +120,45 @@ class _ContactScreenState extends State<ContactScreen> {
           : Scaffold(
               appBar: appBars('Contact', context),
               drawer: Drawers(),
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 0.50,
+                            spreadRadius: .90, // soften the shadow
+                            offset: Offset(
+                              0.0, // Move to right 10  horizontally
+                              0.0, // Move to bottom 10 Vertically
+                            ),
+                          )
+                        ],
+                        color: Colors.white,
+                      ),
+                      margin: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
+                      child: Search(
+                        height: 45,
+                        color: Color.fromRGBO(242, 241, 246, 1),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    ...contactList.map((e) => ContactCard()).toList(),
+                  ],
+                ),
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(EditContactScreen.routeName);
+                },
+                child: Icon(Icons.add),
+              ),
             ),
     );
   }

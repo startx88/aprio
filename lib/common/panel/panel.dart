@@ -22,10 +22,11 @@ class Panel extends StatelessWidget {
         color: Colors.white,
         child: Column(
           children: [
-            PanelTitle(
-              title: panelTitle,
-              action: Container(),
-            ),
+            if (panelTitle != null)
+              PanelTitle(
+                title: panelTitle,
+                action: Container(),
+              ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 15),
               child: child,
