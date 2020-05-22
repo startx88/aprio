@@ -69,6 +69,7 @@ class PersonalInfo extends StatelessWidget {
                       child: Column(
                         children: [
                           Container(
+                            margin: const EdgeInsets.only(bottom: 10.0),
                             height: 50,
                             child: TextField(
                               keyboardType: TextInputType.text,
@@ -80,6 +81,7 @@ class PersonalInfo extends StatelessWidget {
                           ),
                           Container(
                             height: 50,
+                            margin: const EdgeInsets.only(bottom: 10.0),
                             child: TextField(
                               keyboardType: TextInputType.text,
                               decoration: InputDecoration(
@@ -90,6 +92,7 @@ class PersonalInfo extends StatelessWidget {
                           ),
                           Container(
                             height: 50,
+                            margin: const EdgeInsets.only(bottom: 10.0),
                             child: TextField(
                               keyboardType: TextInputType.text,
                               decoration: InputDecoration(

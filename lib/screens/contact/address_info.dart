@@ -24,6 +24,7 @@ class AddressInformation extends StatelessWidget {
                       children: [
                         Container(
                           height: 50,
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           child: TextField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -34,6 +35,7 @@ class AddressInformation extends StatelessWidget {
                         ),
                         Container(
                           height: 50,
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           child: TextField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -44,6 +46,7 @@ class AddressInformation extends StatelessWidget {
                         ),
                         Container(
                           height: 50,
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           child: TextField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -54,6 +57,7 @@ class AddressInformation extends StatelessWidget {
                         ),
                         Container(
                           height: 50,
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           child: TextField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -64,6 +68,7 @@ class AddressInformation extends StatelessWidget {
                         ),
                         Container(
                           height: 50,
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           child: TextField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -88,6 +93,7 @@ class AddressInformation extends StatelessWidget {
                       children: [
                         Container(
                           height: 50,
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           child: TextField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -98,6 +104,7 @@ class AddressInformation extends StatelessWidget {
                         ),
                         Container(
                           height: 50,
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           child: TextField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -108,6 +115,7 @@ class AddressInformation extends StatelessWidget {
                         ),
                         Container(
                           height: 50,
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           child: TextField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -118,6 +126,7 @@ class AddressInformation extends StatelessWidget {
                         ),
                         Container(
                           height: 50,
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           child: TextField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -128,6 +137,7 @@ class AddressInformation extends StatelessWidget {
                         ),
                         Container(
                           height: 50,
+                          margin: const EdgeInsets.only(bottom: 10.0),
                           child: TextField(
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
